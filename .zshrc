@@ -15,13 +15,6 @@ fi
 
 export PATH="/usr/local/bin:/usr/bin:$PATH"
 
-if [ Darwin = `uname` ]; then
-  source $HOME/.profile-macos
-fi
-
-# SSH_AUTH_SOCK set to GPG to enable using gpgagent as the ssh agent.
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -51,6 +44,8 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::rust
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::nvm
+zinit snippet OMZP::terraform
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -60,11 +55,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 source $HOME/.profile
-source $HOME/.config/tmuxinator/tmuxinator.zsh
-
-if [ Linux = `uname` ]; then
-  source $HOME/.profile-linux
-fi
 
 setopt auto_cd
 
@@ -104,3 +94,51 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 fi
 
 zle_highlight=('paste:none')
+
+# pnpm
+export PNPM_HOME="/Users/yedidyarashi/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
+
+eval $(thefuck --alias)
+alias docker_login='aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 641202632344.dkr.ecr.us-west-2.amazonaws.com'
+alias db_start='docker run --pull=always -v mysql:/var/lib/mysql -p 3306:3306 --name=mysql -e MYSQL_ROOT_HOST=% -e TZ=UTC -d 641202632344.dkr.ecr.us-west-2.amazonaws.com/mysql-base:mysql-8.0.31 --sql_mode=NO_ENGINE_SUBSTITUTION --max_connections=10000 --character-set-server=latin1 --collation-server=latin1_swedish_ci --default-authentication-plugin=mysql_native_password --key_buffer_size=16777216 --innodb_buffer_pool_instances=8 --default-time-zone=-08:00 --innodb_buffer_pool_size=5368709120 --wait_timeout=31536000 --explicit_defaults_for_timestamp=1 --max_allowed_packet=1073741824'
+
+# SDKMAN!
+export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+function add_kube_context() {
+  PROFILE=$1
+  ALIAS=$2
+
+  if [ -z $ALIAS ]; then
+    echo "Cluster alias was not specified, using AWS profile name as alias"
+    ALIAS=$PROFILE
+  fi
+  CLUSTER_NAME="$(aws eks list-clusters --output json --profile $PROFILE | jq -r ".clusters[0]")"
+  ROLE_ARN="$(aws iam list-roles --output json --profile $PROFILE | jq -r '.Roles[]  | select (.RoleName == "eks-ni-admin") | .Arn')"
+  echo "Adding Cluster $CLUSTER_NAME, Alias - $ALIAS"
+  aws eks update-kubeconfig --name $CLUSTER_NAME --role-arn $ROLE_ARN --profile $PROFILE --alias $ALIAS
+}
+
+AWS_CONFIG_FILE=~/.aws/config
+
+# Safe Aliases for alternative tools
+alias cat="bat"
+alias ls="exa"
+alias top="htop"
+alias uname="neofetch"
+alias du="ncdu"
+alias df="duf"
+alias find="fd"
+alias man="tldr"
