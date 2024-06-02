@@ -37,6 +37,10 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 zinit light ohmyzsh/ohmyzsh
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
+
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
