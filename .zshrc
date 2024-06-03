@@ -68,11 +68,11 @@ export PATH="$PATH:$HOME/Library/flutter/bin"
 alias sudo='sudo '
 export LD_LIBRARY_PATH=/usr/local/lib
 
-# Completions
+# # Completions
 
-source <(doctl completion zsh)
+# source <(doctl completion zsh)
 
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 # P10k customizations
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -146,3 +146,9 @@ alias du="ncdu"
 alias df="duf"
 alias find="fd"
 alias man="tldr"
+alias cd="z"
+alias grep="rg"
+
+eval "$(zoxide init zsh)"
+
+alias zi="z -i"
