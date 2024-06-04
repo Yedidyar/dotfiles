@@ -152,3 +152,7 @@ alias grep="rg"
 eval "$(zoxide init zsh)"
 
 alias zi="z -i"
+
+# export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+alias fzfp="fzf --preview 'bat --style numbers,changes --color=always {} | head -500'"
