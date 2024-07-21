@@ -68,12 +68,6 @@ export PATH="$PATH:$HOME/Library/flutter/bin"
 alias sudo='sudo '
 export LD_LIBRARY_PATH=/usr/local/lib
 
-# # Completions
-
-# source <(doctl completion zsh)
-
-# source <(kubectl completion zsh)
-
 # P10k customizations
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -146,12 +140,15 @@ alias du="ncdu"
 alias df="duf"
 alias find="fd"
 alias man="tldr"
-alias cd="z"
 alias grep="rg"
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
-alias zi="z -i"
 
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 alias fzfp="fzf --preview 'bat --style numbers,changes --color=always {} | head -500'"
+
+export TFENV_ARCH=amd64
+# Created by `pipx` on 2024-07-18 11:54:49
+export PATH="$PATH:/Users/yedidyarashi/.local/bin"
