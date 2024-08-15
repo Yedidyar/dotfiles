@@ -133,7 +133,7 @@ AWS_CONFIG_FILE=~/.aws/config
 
 # Safe Aliases for alternative tools
 alias cat="bat"
-alias ls="exa"
+alias ls="eza"
 alias top="htop"
 alias uname="neofetch"
 alias du="ncdu"
