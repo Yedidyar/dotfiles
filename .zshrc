@@ -115,18 +115,27 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-function add_kube_context() {
-  PROFILE=$1
-  ALIAS=$2
+function add_cluster() {
+	PROFILE=$1
+	CLUSTER_NAME=$2
+	ROLE=${3:-eks-ni-admin}
 
-  if [ -z $ALIAS ]; then
-    echo "Cluster alias was not specified, using AWS profile name as alias"
-    ALIAS=$PROFILE
-  fi
-  CLUSTER_NAME="$(aws eks list-clusters --output json --profile $PROFILE | jq -r ".clusters[0]")"
-  ROLE_ARN="$(aws iam list-roles --output json --profile $PROFILE | jq -r '.Roles[]  | select (.RoleName == "eks-ni-admin") | .Arn')"
-  echo "Adding Cluster $CLUSTER_NAME, Alias - $ALIAS"
-  aws eks update-kubeconfig --name $CLUSTER_NAME --role-arn $ROLE_ARN --profile $PROFILE --alias $ALIAS
+	KUBE_ALIAS="$PROFILE-$CLUSTER_NAME"
+
+	if [ -z "$CLUSTER_NAME" ]; then
+		echo "Cluster name was not specified, using the first cluster from the list, ROLE - $ROLE"
+		CLUSTER_NAME="$(aws eks list-clusters --output json --profile "$PROFILE" | jq -r '.clusters[0]')"
+		KUBE_ALIAS="$PROFILE-$CLUSTER_NAME"
+	fi
+
+	ROLE_ARN="$(aws iam get-role --output json --profile "$PROFILE" --role-name "$ROLE" | jq -r '.Role.Arn')"
+
+	if [ -z "$ROLE_ARN" ]; then
+		echo "Role $ROLE not found, exiting"
+	else	
+        echo "Adding Cluster $CLUSTER_NAME, Kubernetes Alias - $KUBE_ALIAS, Role - $ROLE, Role ARN - $ROLE_ARN"
+        aws eks update-kubeconfig --name "$CLUSTER_NAME" --role-arn "$ROLE_ARN" --profile "$PROFILE" --alias "$KUBE_ALIAS"
+    fi
 }
 
 AWS_CONFIG_FILE=~/.aws/config
