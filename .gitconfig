@@ -9,21 +9,7 @@
 [core]
 	autocrlf = input
 	editor = nvim
-[safe]
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
-	directory = 
+	pager = delta
 [gitbutler]
 	aiModelProvider = openai
 [credential]
@@ -31,3 +17,17 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[http]
+	postBuffer = 157286400
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
