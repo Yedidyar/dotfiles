@@ -50,6 +50,7 @@ zinit snippet OMZP::rust
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::nvm
 zinit snippet OMZP::terraform
+zinit snippet OMZP::docker
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
