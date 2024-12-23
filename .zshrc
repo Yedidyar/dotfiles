@@ -110,7 +110,7 @@ alias db_start='docker run --pull=always -v mysql:/var/lib/mysql -p 3306:3306 -e
 
 # SDKMAN!
 export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
@@ -146,12 +146,9 @@ alias cat="bat"
 alias ls="eza"
 alias top="htop"
 alias uname="neofetch"
-alias du="ncdu"
-alias df="duf"
-alias find="fd"
 alias man="tldr"
 alias grep="rg"
-
+alias gb='(git branch --show-current && git branch --all | grep -v "HEAD" | grep -v "$(git branch --show-current)") | fzf --preview="git log --oneline --graph --decorate --color {1}" | pbcopy'
 eval "$(zoxide init --cmd cd zsh)"
 
 
@@ -162,3 +159,5 @@ alias fzfp="fzf --preview 'bat --style numbers,changes --color=always {} | head 
 export TFENV_ARCH=amd64
 # Created by `pipx` on 2024-07-18 11:54:49
 export PATH="$PATH:/Users/yedidyarashi/.local/bin"
+alias docker_clean="docker system prune -a --volumes"
+export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"
