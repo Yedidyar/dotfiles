@@ -106,7 +106,7 @@ export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
 
 eval $(thefuck --alias)
 alias docker_login='aws ecr get-login-password --region us-west-2 --profile eng-shared-services-02 | docker login --username AWS --password-stdin ecr-dns-redirect.nextinsurance.io'
-alias db_start='docker run --pull=always -v mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_HOST=% -e TZ=UTC -d ecr-dns-redirect.nextinsurance.io/mysql-base:mysql-8.0.36-oraclelinux8 --sql_mode=NO_ENGINE_SUBSTITUTION --max_connections=10000 --character-set-server=latin1 --collation-server=latin1_swedish_ci --default-authentication-plugin=mysql_native_password --key_buffer_size=16777216 --innodb_buffer_pool_instances=8 --default-time-zone=-08:00 --innodb_buffer_pool_size=5368709120 --wait_timeout=31536000 --explicit_defaults_for_timestamp=1 --max_allowed_packet=1073741824'
+alias db_start='docker run --pull=always -v mysql:/var/lib/mysql -p 3306:3306 --name=mysql -e MYSQL_ROOT_HOST=% -e TZ=UTC -d ecr-dns-redirect.nextinsurance.io/mysql-with-data:mysql-8.0.39-oraclelinux9-dataready-loaded --sql_mode=NO_ENGINE_SUBSTITUTION --max_connections=10000 --character-set-server=latin1 --collation-server=latin1_swedish_ci --default-authentication-plugin=mysql_native_password --key_buffer_size=16777216 --innodb_buffer_pool_instances=8 --default-time-zone=-08:00 --innodb_buffer_pool_size=5368709120 --wait_timeout=31536000 --explicit_defaults_for_timestamp=1 --max_allowed_packet=1073741824'
 
 # SDKMAN!
 export SDKMAN_DIR="$HOME/.sdkman"
