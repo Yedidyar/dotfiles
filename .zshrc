@@ -119,7 +119,7 @@ export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
 function add_cluster() {
 	PROFILE=$1
 	CLUSTER_NAME=$2
-	ROLE=${3:-eks-ni-admin}
+	ROLE=${3:-ni-eks-admins}
 
 	KUBE_ALIAS="$PROFILE-$CLUSTER_NAME"
 
