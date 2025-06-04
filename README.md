@@ -19,7 +19,7 @@ brew install git
 ### Stow
 
 ```sh
-brew instll stow
+brew install stow
 ```
 
 ## Installation
