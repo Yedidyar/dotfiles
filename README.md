@@ -27,8 +27,8 @@ brew install stow
 1. Clone the dotfiles repository into your `$HOME` directory:
 
    ```sh
-   git clone git@github.com:next-insurance/devex-dotfiles.git
-   cd devex-dotfiles
+   git clone https://github.com/yedidyar-ni/dotfiles.git
+   cd dotfiles
    ```
 
 2. Use GNU stow to create symlinks for the dotfiles:
