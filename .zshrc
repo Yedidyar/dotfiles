@@ -95,14 +95,14 @@ fi
 zle_highlight=('paste:none')
 
 # pnpm
-export PNPM_HOME="/Users/yedidyarashi/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
-export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
+export PATH="$HOME/.rd/bin:$PATH"
 
 eval $(thefuck --alias)
 alias docker_login='aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ecr-dns-redirect.nextinsurance.io'
@@ -113,7 +113,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/yedidyarashi/.rd/bin:$PATH"
+export PATH="$HOME/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 function add_cluster() {
@@ -158,7 +158,7 @@ alias fzfp="fzf --preview 'bat --style numbers,changes --color=always {} | head 
 
 export TFENV_ARCH=amd64
 # Created by `pipx` on 2024-07-18 11:54:49
-export PATH="$PATH:/Users/yedidyarashi/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 alias docker_clean="docker system prune -a --volumes"
 export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"
 export ENVIRONMENT="dev"
