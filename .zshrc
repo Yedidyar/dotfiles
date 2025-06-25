@@ -162,3 +162,5 @@ export PATH="$PATH:$HOME/.local/bin"
 alias docker_clean="docker system prune -a --volumes"
 export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"
 export ENVIRONMENT="dev"
+
+[ -f ~/.ghprofiles ] && source ~/.ghprofiles
