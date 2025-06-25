@@ -1,3 +1,10 @@
+# Agent detection - only activate minimal mode for actual agents  
+if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
+  export AGENT_MODE=true
+else
+  export AGENT_MODE=false
+fi
+
 # Set the GPG_TTY to be the same as the TTY, either via the env var
 # or via the tty command.
 if [ -n "$TTY" ]; then
@@ -19,10 +26,10 @@ export PATH="/usr/local/bin:/usr/bin:$PATH"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
+if [[ "$AGENT_MODE" == "false" ]] && [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 autoload -Uz compinit && compinit
 
@@ -36,7 +43,9 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 zinit light ohmyzsh/ohmyzsh
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+if [[ "$AGENT_MODE" == "false" ]]; then
+  zinit ice depth=1; zinit light romkatv/powerlevel10k
+fi
 
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
@@ -71,7 +80,10 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 # P10k customizations
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+if [[ "$AGENT_MODE" == "false" ]]; then
+  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+fi
 
 # Fix for password store
 export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
