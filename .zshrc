@@ -176,3 +176,9 @@ export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"
 export ENVIRONMENT="dev"
 
 [ -f ~/.ghprofiles ] && source ~/.ghprofiles
+
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
