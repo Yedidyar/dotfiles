@@ -124,10 +124,6 @@ alias db_start='docker run --pull=always -v mysql:/var/lib/mysql -p 3306:3306 --
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 function add_cluster() {
 	PROFILE=$1
 	CLUSTER_NAME=$2
@@ -182,3 +178,4 @@ zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
+eval "$(direnv hook zsh)"
