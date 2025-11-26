@@ -163,8 +163,8 @@ eval "$(zoxide init --cmd cd zsh)"
 source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 alias fzfp="fzf --preview 'bat --style numbers,changes --color=always {} | head -500'"
+alias killport='f() { lsof -ti tcp:$1 | xargs kill -9; }; f'
 
-export TFENV_ARCH=amd64
 # Created by `pipx` on 2024-07-18 11:54:49
 export PATH="$PATH:$HOME/.local/bin"
 alias docker_clean="docker system prune -a --volumes"

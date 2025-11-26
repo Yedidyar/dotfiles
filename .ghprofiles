@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ghprofile() {
+  if [ "$1" = "personal" ]; then
+    git config user.name "Yedidyar"
+    git config user.email "yedidyarashi@gmail.com"
+    git remote set-url origin git@github.com-personal:Yedidyar/$(git remote get-url origin | sed 's/.*[:\/]//')
+    echo "✅ Switched to yedidyar GitHub profile"
+  elif [ "$1" = "work" ]; then
+    git config user.name "yedidyar-ni"
+    git config user.email "yedidya.r@next-insurance.com"
+    git remote set-url origin git@github.com:next-insurance/$(git remote get-url origin | sed 's/.*[:\/]//')
+    echo "✅ Switched to yedidyar-ni GitHub profile"
+  else
+    echo "❌ Usage: ghprofile [personal|work]"
+  fi
+}

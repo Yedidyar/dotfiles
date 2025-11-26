@@ -1,0 +1,18 @@
+# Ignore sensitive files
+.npmrc
+
+# Ignore backup files
+*.backup
+*.bak
+*~
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files
+*.swp
+*.swo
+*~
+
+
