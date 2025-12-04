@@ -1,6 +1,6 @@
 [user]
-	email = yedidya.r@next-insurance.com
-	name = yedidyar-ni
+	email = yrashi@matia.io
+	name = yrashi-matia
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -8,7 +8,7 @@
 	required = true
 [core]
 	autocrlf = input
-	editor = nvim
+	editor = cursor
 	pager = delta
 [gitbutler]
 	aiModelProvider = openai
@@ -25,8 +25,7 @@
 
 [diff]
     colorMoved = default
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[safe]
+	directory = /Users/yrashi/code/matia

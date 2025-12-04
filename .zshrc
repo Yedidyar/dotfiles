@@ -1,4 +1,4 @@
-# Agent detection - only activate minimal mode for actual agents  
+# Agent detection - only activate minimal mode for actual agents
 if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
   export AGENT_MODE=true
 else
@@ -57,7 +57,6 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::rust
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::nvm
 zinit snippet OMZP::terraform
 zinit snippet OMZP::docker
 
@@ -87,10 +86,6 @@ fi
 
 # Fix for password store
 export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
-
-export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load N
 
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
@@ -141,7 +136,7 @@ function add_cluster() {
 
 	if [ -z "$ROLE_ARN" ]; then
 		echo "Role $ROLE not found, exiting"
-	else	
+	else
         echo "Adding Cluster $CLUSTER_NAME, Kubernetes Alias - $KUBE_ALIAS, Role - $ROLE, Role ARN - $ROLE_ARN"
         aws eks update-kubeconfig --name "$CLUSTER_NAME" --role-arn "$ROLE_ARN" --profile "$PROFILE" --alias "$KUBE_ALIAS"
     fi
@@ -157,6 +152,7 @@ alias uname="neofetch"
 alias man="tldr"
 alias grep="rg"
 alias gb='(git branch --show-current && git branch --all | grep -v "HEAD" | grep -v "$(git branch --show-current)") | fzf --preview="git log --oneline --graph --decorate --color {1}" | pbcopy'
+alias lg="lazygit"
 eval "$(zoxide init --cmd cd zsh)"
 
 
@@ -179,3 +175,4 @@ source <(carapace _carapace)
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
 eval "$(direnv hook zsh)"
+eval "$(fnm env --use-on-cd --shell zsh)"
